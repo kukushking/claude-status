@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="168" viewBox="0 0 720 168">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+      .t { font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace; font-size: 13px; }
+      .b { font-weight: 700; }
+      .dim { opacity: 0.45; }
+      .cyan { fill: #56d4f5; }
+      .blue { fill: #61afef; }
+      .w { fill: #e6e8ee; }
+      .grn { fill: #98c379; }
+      .bgrn { fill: #b5e890; }
+      .mag { fill: #c678dd; }
+      .ylw { fill: #e5c07b; }
+      .bylw { fill: #f0d890; }
+      .red { fill: #e06c75; }
+      .bred { fill: #f07080; }
+      .g { fill: #5c6370; }
+      .title { fill: #848b98; font-size: 12px; }
+      .dot-r { fill: #ff5f56; }
+      .dot-y { fill: #ffbd2e; }
+      .dot-g { fill: #27c93f; }
+      .sep { fill: #3e4452; }
+    </style>
+  </defs>
+
+  <!-- Terminal window -->
+  <rect width="720" height="168" rx="10" fill="#1e2127"/>
+
+  <!-- Title bar -->
+  <rect width="720" height="34" rx="10" fill="#282c34"/>
+  <rect y="24" width="720" height="10" fill="#282c34"/>
+
+  <!-- Window dots -->
+  <circle cx="20" cy="17" r="6" class="dot-r"/>
+  <circle cx="38" cy="17" r="6" class="dot-y"/>
+  <circle cx="56" cy="17" r="6" class="dot-g"/>
+  <text x="360" y="21" text-anchor="middle" class="t title">claude-status</text>
+
+  <!-- Line 1: ▍ in 12.5K   out 3.2K    ┊  cache 95.0K ▾  8.5K ▴  ┊  $0.3847  3m05s -->
+  <text y="72" class="t">
+    <tspan x="20" class="cyan b">▍</tspan>
+    <tspan class="g"> in </tspan><tspan class="w b">12.5K</tspan>
+    <tspan class="g">   out </tspan><tspan class="w b">3.2K</tspan>
+    <tspan class="sep">   ┊   </tspan>
+    <tspan class="g">cache </tspan><tspan class="bgrn">95.0K</tspan><tspan class="g"> ▾</tspan>
+    <tspan class="mag">  8.5K</tspan><tspan class="g"> ▴</tspan>
+    <tspan class="sep">   ┊   </tspan>
+    <tspan class="bylw b">$0.3847</tspan>
+    <tspan class="g">  3m05s</tspan>
+  </text>
+
+  <!-- Line 2: ▍ Σ  145.3K       28.8K    ┊  ▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱ 42.3% of 200.0K  ┊  +47 −12 -->
+  <text y="102" class="t">
+    <tspan x="20" class="blue b">▍</tspan>
+    <tspan class="g"> Σ  </tspan><tspan class="w">145.3K</tspan>
+    <tspan class="g">       </tspan><tspan class="w">28.8K</tspan>
+    <tspan class="sep">   ┊   </tspan>
+    <tspan class="grn">▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱</tspan>
+    <tspan class="w b"> 42.3%</tspan><tspan class="g"> of 200.0K</tspan>
+    <tspan class="sep">   ┊   </tspan>
+    <tspan class="bgrn">+47</tspan>
+    <tspan class="bred"> −12</tspan>
+  </text>
+
+  <!-- Legend -->
+  <line x1="20" y1="125" x2="700" y2="125" stroke="#3e4452" stroke-width="0.5" stroke-dasharray="3,4"/>
+  <text y="148" class="t" font-size="10.5">
+    <tspan x="24" class="g">tokens / request</tspan>
+    <tspan x="200" class="g">cache efficiency</tspan>
+    <tspan x="380" class="g">session cost</tspan>
+    <tspan x="520" class="g">context window</tspan>
+    <tspan x="650" class="g">diff</tspan>
+  </text>
+</svg>

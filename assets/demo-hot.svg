@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="130" viewBox="0 0 720 130">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+      .t { font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace; font-size: 13px; }
+      .b { font-weight: 700; }
+      .cyan { fill: #56d4f5; }
+      .blue { fill: #61afef; }
+      .w { fill: #e6e8ee; }
+      .grn { fill: #98c379; }
+      .bgrn { fill: #b5e890; }
+      .mag { fill: #c678dd; }
+      .red { fill: #e06c75; }
+      .bred { fill: #f07080; }
+      .g { fill: #5c6370; }
+      .sep { fill: #3e4452; }
+    </style>
+  </defs>
+
+  <rect width="720" height="130" rx="8" fill="#1e2127"/>
+
+  <!-- Red accent -->
+  <rect y="0" width="720" height="3" rx="8" fill="#e06c75" opacity="0.5"/>
+
+  <!-- Line 1 -->
+  <text y="40" class="t">
+    <tspan x="20" class="cyan b">▍</tspan>
+    <tspan class="g"> in </tspan><tspan class="w b">55.0K</tspan>
+    <tspan class="g">   out </tspan><tspan class="w b">12.0K</tspan>
+    <tspan class="sep">   ┊   </tspan>
+    <tspan class="g">cache </tspan><tspan class="bgrn">180.0K</tspan><tspan class="g"> ▾</tspan>
+    <tspan class="mag">  0</tspan><tspan class="g"> ▴</tspan>
+    <tspan class="sep">   ┊   </tspan>
+    <tspan class="bred b">$2.1540</tspan>
+    <tspan class="g">  60m00s</tspan>
+  </text>
+
+  <!-- Line 2 -->
+  <text y="74" class="t">
+    <tspan x="20" class="blue b">▍</tspan>
+    <tspan class="g"> Σ  </tspan><tspan class="w">1.9M</tspan>
+    <tspan class="g">         </tspan><tspan class="w">420.0K</tspan>
+    <tspan class="sep">   ┊   </tspan>
+    <tspan class="red">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱</tspan>
+    <tspan class="w b"> 91.5%</tspan><tspan class="g"> of 200.0K</tspan>
+    <tspan class="sep">   ┊   </tspan>
+    <tspan class="bgrn">+312</tspan>
+    <tspan class="bred"> −89</tspan>
+  </text>
+
+  <!-- Label -->
+  <text y="112" class="t" font-size="10.5">
+    <tspan x="24" class="red" opacity="0.6">cost and context warnings turn red when things get hot</tspan>
+  </text>
+</svg>
