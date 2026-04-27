@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="130" viewBox="0 0 720 130">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="170" viewBox="0 0 720 170">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
@@ -10,6 +10,7 @@
       .grn { fill: #98c379; }
       .bgrn { fill: #b5e890; }
       .mag { fill: #c678dd; }
+      .ylw { fill: #e5c07b; }
       .red { fill: #e06c75; }
       .bred { fill: #f07080; }
       .g { fill: #5c6370; }
@@ -17,7 +18,7 @@
     </style>
   </defs>
 
-  <rect width="720" height="130" rx="8" fill="#1e2127"/>
+  <rect width="720" height="170" rx="8" fill="#1e2127"/>
 
   <!-- Red accent -->
   <rect y="0" width="720" height="3" rx="8" fill="#e06c75" opacity="0.5"/>
@@ -48,8 +49,18 @@
     <tspan class="bred"> −89</tspan>
   </text>
 
+  <!-- Line 3: rate limits -->
+  <text y="108" class="t">
+    <tspan x="20" class="mag b">▍</tspan>
+    <tspan class="g"> 5h </tspan><tspan class="red">▰▰▰▰▰▰▰▰▰▱</tspan>
+    <tspan class="w b"> 88.4%</tspan><tspan class="g"> ⟳12m</tspan>
+    <tspan class="sep">   ┊   </tspan>
+    <tspan class="g">7d </tspan><tspan class="ylw">▰▰▰▰▰▰▰▱▱▱</tspan>
+    <tspan class="w b"> 65.3%</tspan><tspan class="g"> ⟳5d3h</tspan>
+  </text>
+
   <!-- Label -->
-  <text y="112" class="t" font-size="10.5">
-    <tspan x="24" class="red" opacity="0.6">cost and context warnings turn red when things get hot</tspan>
+  <text y="148" class="t" font-size="10.5">
+    <tspan x="24" class="red" opacity="0.6">cost, context, and rate-limit warnings turn red when things get hot</tspan>
   </text>
 </svg>
