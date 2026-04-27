@@ -4,7 +4,7 @@
 
 **Know what you're burning.**
 
-A live status line for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that shows token usage, cost, cache hits, and context window pressure — updated after every response.
+A live status line for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that shows token usage, cost, cache hits, context window pressure, and Claude.ai rate-limit usage — updated after every response.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Shell](https://img.shields.io/badge/shell-bash-green.svg)](claude-status.sh)
@@ -128,7 +128,7 @@ When things get hot:
 
 ## How it works
 
-Claude Code's [status line](https://docs.anthropic.com/en/docs/claude-code/status-line) pipes session data as JSON to a shell script after every assistant response. `claude-status` parses that JSON and renders a color-coded 2-line display.
+Claude Code's [status line](https://docs.anthropic.com/en/docs/claude-code/status-line) pipes session data as JSON to a shell script after every assistant response. `claude-status` parses that JSON and renders a color-coded 2- or 3-line display (the third line appears only when Claude.ai rate-limit data is available).
 
 No API calls. No external dependencies beyond Python 3 and Bash. Runs locally.
 
