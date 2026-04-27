@@ -5,12 +5,12 @@
 INPUT=$(cat)
 
 eval "$(echo "$INPUT" | python3 -c "
-import json, sys
+import json, sys, time
 
 data = json.load(sys.stdin)
 cw = data.get('context_window', {})
 cost_data = data.get('cost', {})
-current = cw.get('current_usage', {})
+current = cw.get('current_usage', {}) or {}
 
 inp = current.get('input_tokens', 0)
 out = current.get('output_tokens', 0)
@@ -37,6 +37,32 @@ def fmt(n):
         return f'{n/1_000:.1f}K'
     return str(n)
 
+def fmt_eta(target):
+    if not target:
+        return ''
+    delta = int(target - time.time())
+    if delta <= 0:
+        return 'now'
+    if delta < 60:
+        return f'{delta}s'
+    if delta < 3600:
+        return f'{delta//60}m'
+    if delta < 86400:
+        h = delta // 3600
+        m = (delta % 3600) // 60
+        return f'{h}h{m:02d}m'
+    d = delta // 86400
+    h = (delta % 86400) // 3600
+    return f'{d}d{h}h'
+
+rl = data.get('rate_limits') or {}
+fh = rl.get('five_hour') or {}
+sd = rl.get('seven_day') or {}
+fh_pct = fh.get('used_percentage')
+sd_pct = sd.get('used_percentage')
+fh_pct_s = '' if fh_pct is None else f'{fh_pct:.1f}'
+sd_pct_s = '' if sd_pct is None else f'{sd_pct:.1f}'
+
 print(f'INP={fmt(inp)}')
 print(f'OUT={fmt(out)}')
 print(f'CACHE_CREATE={fmt(cache_create)}')
@@ -50,6 +76,10 @@ print(f'LINES_ADDED={lines_added}')
 print(f'LINES_REMOVED={lines_removed}')
 print(f'WINDOW_SIZE={fmt(window_size)}')
 print(f'USED_PCT_RAW={used_pct}')
+print(f'RL_5H_PCT={fh_pct_s}')
+print(f'RL_5H_ETA={fmt_eta(fh.get(\"resets_at\"))}')
+print(f'RL_7D_PCT={sd_pct_s}')
+print(f'RL_7D_ETA={fmt_eta(sd.get(\"resets_at\"))}')
 " 2>/dev/null)"
 
 if [ -z "$COST" ]; then
@@ -125,3 +155,31 @@ printf "${BC}%s${RST} ${B}%s%%${RST}${D} of %s${RST}" "$BAR" "$USED_PCT" "$WINDO
 printf "$S"
 printf "${BGRN}+%s${RST} ${BRED}−%s${RST}" "$LINES_ADDED" "$LINES_REMOVED"
 echo ""
+
+# ── line 3: Claude.ai rate limits (when present) ────────
+print_rl() {
+  local label="$1" pct="$2" eta="$3"
+  local pct_int="${pct%%.*}"
+  [ -z "$pct_int" ] && pct_int=0
+  local w=10
+  local filled=$(( (pct_int * w + 99) / 100 ))
+  [ "$filled" -gt "$w" ] && filled=$w
+  local color
+  if   [ "$pct_int" -ge 80 ]; then color="$RED"
+  elif [ "$pct_int" -ge 50 ]; then color="$YLW"
+  else color="$GRN"
+  fi
+  local bar="" i
+  for ((i=0; i<filled; i++)); do bar+="▰"; done
+  for ((i=filled; i<w; i++)); do bar+="▱"; done
+  printf "${D}%s ${RST}${color}%s${RST} ${B}%s%%${RST}" "$label" "$bar" "$pct"
+  [ -n "$eta" ] && printf "${D} ⟳%s${RST}" "$eta"
+}
+
+if [ -n "$RL_5H_PCT" ] || [ -n "$RL_7D_PCT" ]; then
+  printf "${B}${MAG}▍${RST}"
+  [ -n "$RL_5H_PCT" ] && { printf " "; print_rl "5h " "$RL_5H_PCT" "$RL_5H_ETA"; }
+  [ -n "$RL_5H_PCT" ] && [ -n "$RL_7D_PCT" ] && printf "$S"
+  [ -n "$RL_7D_PCT" ] && { [ -z "$RL_5H_PCT" ] && printf " "; print_rl "7d " "$RL_7D_PCT" "$RL_7D_ETA"; }
+  echo ""
+fi

@@ -71,6 +71,7 @@ bash uninstall.sh
 ```
 ▍ in 12.5K   out 3.2K    ┊  cache 95.0K ▾  8.5K ▴  ┊  $0.3847  3m05s
 ▍ Σ  145.3K       28.8K  ┊  ▰▰▰▰▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱ 42.3% of 200.0K  ┊  +47 −12
+▍ 5h ▰▰▰▱▱▱▱▱▱▱ 23.5% ⟳2h14m  ┊  7d ▰▰▰▰▱▱▱▱▱▱ 41.2% ⟳3d2h
 ```
 
 **Line 1** — the last request:
@@ -95,6 +96,16 @@ bash uninstall.sh
 | `42.3% of 200.0K` | Percentage of context window used / max window size |
 | `+47` / `−12` | Lines of code added / removed this session |
 
+**Line 3** — Claude.ai rate limits (only shown when present; requires Claude Code 2.1.80+ and a Pro/Max subscription):
+
+| Element | Meaning |
+|---|---|
+| `▍` (magenta) | Visual accent for rate-limit line |
+| `5h ▰▰▰▱▱▱▱▱▱▱ 23.5%` | Usage in the rolling 5-hour window |
+| `⟳2h14m` | Time until the 5-hour window resets |
+| `7d ▰▰▰▰▱▱▱▱▱▱ 41.2%` | Usage in the weekly window |
+| `⟳3d2h` | Time until the weekly window resets |
+
 <br>
 
 ## Color coding
@@ -105,6 +116,7 @@ Everything shifts color as you burn through tokens:
 |--------|-------|--------|-----|
 | **Cost** | < $0.25 | < $1.00 | > $1.00 |
 | **Context** | < 50% | < 80% | > 80% |
+| **Rate limit** | < 50% | < 80% | > 80% |
 
 When things get hot:
 
